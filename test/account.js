@@ -1,11 +1,11 @@
 const axios = require('axios');
 const chai = require('chai');
 
-describe('Contact', function () {
-  const URL = 'http://localhost:3000/api/contacts';
+describe('Account', function () {
+  const URL = 'http://localhost:3000/api/accounts';
 
-  describe('GET /api/contacts', () => {
-    it('should return array of contacts', (done) => {
+  describe('GET /api/accounts', () => {
+    it('should return array of accounts', (done) => {
       axios
         .get(URL)
         .then((response) => {
@@ -16,14 +16,14 @@ describe('Contact', function () {
     });
   });
 
-  describe('POST /api/contacts', () => {
-    it('should insert contact', (done) => {
+  describe('POST /api/accounts', () => {
+    it('should insert account', (done) => {
       axios
         .post(URL, {
-          name: 'Komalpreet',
-          phone: 123456,
+          first_name: 'Komalpreet',
+          last_name: 'Kaur',
           email: 'komalpreet@gmail.com',
-          message: 'Hello world',
+          password: '123',
         })
         .then((response) => {
           chai.expect(response.status).to.equal(200);

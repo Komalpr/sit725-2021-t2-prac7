@@ -6,7 +6,7 @@ document.getElementById('form').onsubmit = (event) => {
   const formData = Object.fromEntries(new FormData(event.target));
 
   // Send request to server
-  fetch('/api/contacts', {
+  fetch('/api/accounts/auth', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,8 +15,13 @@ document.getElementById('form').onsubmit = (event) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      alert(data.message);
-      event.target.reset();
+      if (data?.success) {
+        // Save account details in session storage
+        sessionStorage.setItem('account', JSON.stringify(data.account));
+        window.location = 'shop.html';
+      } else {
+        alert(data.message);
+      }
     })
     .catch((error) => {
       alert(error.message);
